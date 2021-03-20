@@ -7,8 +7,8 @@ P_LIBRARIES     :=  clib
 CPPFLAGS        +=  $(foreach includedir,$(P_INCLUDE_DIRS),-I$(includedir))
 LDFLAGS         +=  $(foreach librarydir,$(P_LIBRARY_DIRS),-L$(librarydir))
 LDFLAGS         +=  $(foreach library,$(P_LIBRARIES),-l$(library))
-CC              :=  gcc -Wall -g
-CCFLAGS         :=  -Wall -g 
+CC              :=  gcc
+CFLAGS          :=  -std=c89 -pedantic -Wall -g
 
 .PHONY:         all clean
 all:            $(P_NAME)
