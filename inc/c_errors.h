@@ -24,35 +24,36 @@
 #ifndef C_ERRORS_H
 #define C_ERRORS_H
 
+typedef enum clib_error {
 /* ------------------------------------------------------------------------*/
 /*                 C O M M O N    E R R O R    C O D E                     */
 /* ------------------------------------------------------------------------*/
-#define CLIB_ERROR_SUCCESS  0
-#define CLIB_ERROR_ERROR    1
-#define CLIB_ERROR_MEMORY   2
-#define CLIB_ELEMENT_RETURN_ERROR 3
+    CLIB_ERROR_SUCCESS,
+    CLIB_ERROR_ERROR,
+    CLIB_ERROR_MEMORY,
+    CLIB_ELEMENT_RETURN_ERROR,
+
 /* ------------------------------------------------------------------------*/
 /*         D Y N A M I C    A R R A Y   E R R O R    C O D E S             */
 /* ------------------------------------------------------------------------*/
-#define CLIB_ARRAY_NOT_INITIALIZED    101
-#define CLIB_ARRAY_INDEX_OUT_OF_BOUND 102
-#define CLIB_ARRAY_INSERT_FAILED      103
+    CLIB_ARRAY_NOT_INITIALIZED = 101,
+    CLIB_ARRAY_INDEX_OUT_OF_BOUND,
+    CLIB_ARRAY_INSERT_FAILED,
 
-#define CLIB_DEQUE_NOT_INITIALIZED    201
-#define CLIB_DEQUE_INDEX_OUT_OF_BOUND 202
+    CLIB_DEQUE_NOT_INITIALIZED = 201,
+    CLIB_DEQUE_INDEX_OUT_OF_BOUND,
 
-#define CLIB_RBTREE_NOT_INITIALIZED   401
-#define CLIB_RBTREE_KEY_DUPLICATE     401
-#define CLIB_RBTREE_KEY_NOT_FOUND     402
+    CLIB_RBTREE_NOT_INITIALIZED = 301,
+    CLIB_RBTREE_KEY_DUPLICATE,
+    CLIB_RBTREE_KEY_NOT_FOUND,
 
-#define CLIB_SET_NOT_INITIALIZED      501
-#define CLIB_SET_INVALID_INPUT        502
+    CLIB_SET_NOT_INITIALIZED = 401,
+    CLIB_SET_INVALID_INPUT,
 
-#define CLIB_MAP_NOT_INITIALIZED      501
-#define CLIB_MAP_INVALID_INPUT        502
+    CLIB_MAP_NOT_INITIALIZED = 501,
+    CLIB_MAP_INVALID_INPUT,
 
-#define CLIB_SLIST_INSERT_FAILED      601
-
-
+    CLIB_SLIST_INSERT_FAILED = 601
+} clib_error;
 
 #endif

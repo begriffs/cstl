@@ -35,7 +35,6 @@ typedef void (*clib_destroy)(void*);
 typedef int  (*clib_compare)(void*,void*);
 typedef void (*clib_traversal)( void*);
 
-typedef int  clib_error;
 typedef int  clib_bool;
 
 #define clib_black           0
