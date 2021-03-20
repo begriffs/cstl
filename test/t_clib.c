@@ -22,15 +22,15 @@
  ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
 
 #include <stdio.h>
-void test_c_array();
-void test_c_deque();
-void test_c_tree();
-void test_c_rb();
-void test_c_set();
-void test_c_map();
-void test_c_slist();
-void test_c_map();
-void test_c_algorithms();
+void test_c_array(void);
+void test_c_deque(void);
+void test_c_tree(void);
+void test_c_rb(void);
+void test_c_set(void);
+void test_c_map(void);
+void test_c_slist(void);
+void test_c_map(void);
+void test_c_algorithms(void);
 
 int main( int argc, char**argv ) {	
     printf ( "Performing test for dynamic array\n");
