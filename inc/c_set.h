@@ -21,8 +21,8 @@
  *  THE SOFTWARE.
  ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
 
-#ifndef _C_SET_H_
-#define _C_SET_H_
+#ifndef C_SET_H
+#define C_SET_H
 
 struct clib_set {
     struct clib_rb* root;

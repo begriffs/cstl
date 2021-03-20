@@ -21,9 +21,9 @@
  *  THE SOFTWARE.
  ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
 
-#ifndef _C_ITERATOR_H_
-#define _C_ITERATOR_H_
+#ifndef C_ITERATOR_H
+#define C_ITERATOR_H
 
 
-#endif  /* _C_ITERATOR_H_ */
+#endif  /* C_ITERATOR_H */
 

@@ -67,7 +67,7 @@ push_back_c_slist( struct clib_slist* pSlist, void* elem, size_t elem_size){
     return CLIB_ERROR_SUCCESS;
 }
 static void 
-__remove_c_list ( struct clib_slist* pSlist, struct clib_slist_node* pSlistNode ) {
+_remove_c_list ( struct clib_slist* pSlist, struct clib_slist_node* pSlistNode ) {
     void* elem;
     get_raw_clib_object(pSlistNode->elem, &elem);
     if ( pSlist->destruct_fn) {             
@@ -90,7 +90,7 @@ remove_c_slist( struct clib_slist* pSlist, int pos ) {
 
     if ( pos == 0 ) {                
         pSlist->head = current->next;    
-        __remove_c_list(pSlist, current);    
+        _remove_c_list(pSlist, current);
         pSlist->size--;
         return;
     }
@@ -99,7 +99,7 @@ remove_c_slist( struct clib_slist* pSlist, int pos ) {
 
     temp          = current->next;
     current->next = current->next->next;
-    __remove_c_list ( pSlist, temp );
+    _remove_c_list ( pSlist, temp );
 
     pSlist->size--;
 }

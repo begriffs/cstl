@@ -21,8 +21,8 @@
  *  THE SOFTWARE.
  ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
 
-#ifndef _C_RB_H_
-#define _C_RB_H_
+#ifndef C_RB_H
+#define C_RB_H
 
 struct clib_rb_node {
     struct clib_rb_node *left;

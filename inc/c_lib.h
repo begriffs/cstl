@@ -21,8 +21,8 @@
  *  THE SOFTWARE.
  ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
 
-#ifndef _C_LIB_H_
-#define _C_LIB_H_
+#ifndef C_LIB_H
+#define C_LIB_H
 
 #include "c_errors.h"
 #include <stdlib.h>

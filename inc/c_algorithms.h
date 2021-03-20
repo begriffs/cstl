@@ -20,8 +20,8 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
-#ifndef _C_ALGORITHMS_
-#define _C_ALGORITHMS_
+#ifndef C_ALGORITHMS
+#define C_ALGORITHMS
 
 extern void clib_for_each(struct clib_iterator* pIterator, void (*fn)(void*));
 

@@ -21,8 +21,8 @@
  *  THE SOFTWARE.
  ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
 
-#ifndef _C_DEQUE_H_
-#define _C_DEQUE_H_
+#ifndef C_DEQUE_H
+#define C_DEQUE_H
 
 struct clib_deque {
     struct clib_object**pElements;

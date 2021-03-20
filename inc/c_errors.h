@@ -21,8 +21,8 @@
  *  THE SOFTWARE.
  ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
 
-#ifndef _C_ERRORS_H_
-#define _C_ERRORS_H_
+#ifndef C_ERRORS_H
+#define C_ERRORS_H
 
 /* ------------------------------------------------------------------------*/
 /*                 C O M M O N    E R R O R    C O D E                     */

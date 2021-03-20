@@ -21,8 +21,8 @@
  *  THE SOFTWARE.
  ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
 
-#ifndef _C_ARRAY_H_
-#define _C_ARRAY_H_
+#ifndef C_ARRAY_H
+#define C_ARRAY_H
 
 struct clib_array {
     int no_max_elements; /* Number of maximum elements array can hold without reallocation */

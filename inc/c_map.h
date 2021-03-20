@@ -21,8 +21,8 @@
  *  THE SOFTWARE.
  ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
 
-#ifndef _C_MAP_H_
-#define _C_MAP_H_
+#ifndef C_MAP_H
+#define C_MAP_H
 
 struct clib_map {
     struct clib_rb* root;

@@ -91,7 +91,7 @@ typedef struct test_data_tree {
 
 
 static struct clib_rb_node*
-__find_c_rb ( struct clib_rb* tree, clib_compare fn_c, void* key ) {
+_find_c_rb ( struct clib_rb* tree, clib_compare fn_c, void* key ) {
     struct clib_rb_node* node = tree->root;
     void* current_key = (void*)0;
     int compare_result = 0;
@@ -112,7 +112,7 @@ __find_c_rb ( struct clib_rb* tree, clib_compare fn_c, void* key ) {
 }
 struct clib_rb_node*
 find(struct clib_rb* tree, void* key ) {
-    return __find_c_rb ( tree, tree->compare_fn, key );
+    return _find_c_rb ( tree, tree->compare_fn, key );
 }
 
 static void update_values ( void* v, int *l, int *r, int *p , int *e, struct clib_rb* tree ) {

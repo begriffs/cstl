@@ -39,7 +39,7 @@ static void debug_verify_property_5_helper(struct clib_rb*,struct clib_rb_node*,
 
 
 static void
-__left_rotate(struct clib_rb* pTree, struct clib_rb_node* x){
+_left_rotate(struct clib_rb* pTree, struct clib_rb_node* x){
     struct clib_rb_node* y;
     y = x->right;
     x->right = y->left;
@@ -60,7 +60,7 @@ __left_rotate(struct clib_rb* pTree, struct clib_rb_node* x){
         x->parent = y;
 }
 static void
-__right_rotate(struct clib_rb* pTree, struct clib_rb_node* x) {
+_right_rotate(struct clib_rb* pTree, struct clib_rb_node* x) {
     struct clib_rb_node* y = x->left;
     x->left = y->right;
     if (y->right != rb_sentinel)
@@ -99,7 +99,7 @@ new_c_rb(clib_compare fn_c,clib_destroy fn_ed, clib_destroy fn_vd ){
     return pTree;
 }
 static void
-__rb_insert_fixup( struct clib_rb* pTree, struct clib_rb_node* x ) {
+_rb_insert_fixup( struct clib_rb* pTree, struct clib_rb_node* x ) {
     while (x != pTree->root && x->parent->color == clib_red) {
         if (x->parent == x->parent->parent->left) {
             struct clib_rb_node* y = x->parent->parent->right;
@@ -111,11 +111,11 @@ __rb_insert_fixup( struct clib_rb* pTree, struct clib_rb_node* x ) {
             } else {
                 if (x == x->parent->right){
                     x = x->parent;
-                    __left_rotate (pTree, x);
+                    _left_rotate (pTree, x);
                 }
                 x->parent->color         = clib_black;
                 x->parent->parent->color = clib_red;
-                __right_rotate (pTree, x->parent->parent);
+                _right_rotate (pTree, x->parent->parent);
             }
         } else {
             struct clib_rb_node* y = x->parent->parent->left;
@@ -127,11 +127,11 @@ __rb_insert_fixup( struct clib_rb* pTree, struct clib_rb_node* x ) {
             } else {
                 if (x == x->parent->left) {
                     x = x->parent;
-                    __right_rotate (pTree, x);
+                    _right_rotate (pTree, x);
                 }
                 x->parent->color         = clib_black;
                 x->parent->parent->color = clib_red;
-                __left_rotate (pTree, x->parent->parent);
+                _left_rotate (pTree, x->parent->parent);
             }
         }
     }
@@ -226,20 +226,20 @@ insert_c_rb(struct clib_rb* pTree, void* k, size_t key_size, void* v, size_t val
     else
         pTree->root = x;
 
-    __rb_insert_fixup (pTree, x);
+    _rb_insert_fixup (pTree, x);
 
     debug_verify_properties ( pTree);
     return rc;
 }
 static void
-__rb_remove_fixup( struct clib_rb* pTree, struct clib_rb_node* x ) {
+_rb_remove_fixup( struct clib_rb* pTree, struct clib_rb_node* x ) {
     while (x != pTree->root && x->color == clib_black) {
         if (x == x->parent->left) {
             struct clib_rb_node* w = x->parent->right;
             if (w->color == clib_red) {
                 w->color         = clib_black;
                 x->parent->color = clib_red;
-                __left_rotate (pTree, x->parent);
+                _left_rotate (pTree, x->parent);
                 w = x->parent->right;
             }
             if (w->left->color == clib_black && w->right->color == clib_black) {
@@ -249,13 +249,13 @@ __rb_remove_fixup( struct clib_rb* pTree, struct clib_rb_node* x ) {
                 if (w->right->color == clib_black)  {
                     w->left->color = clib_black;
                     w->color       = clib_red;
-                    __right_rotate (pTree, w);
+                    _right_rotate (pTree, w);
                     w = x->parent->right;
                 }
                 w->color = x->parent->color;
                 x->parent->color = clib_black;
                 w->right->color = clib_black;
-                __left_rotate (pTree, x->parent);
+                _left_rotate (pTree, x->parent);
                 x = pTree->root;
             }
         } else {
@@ -263,7 +263,7 @@ __rb_remove_fixup( struct clib_rb* pTree, struct clib_rb_node* x ) {
             if (w->color == clib_red) {
                 w->color = clib_black;
                 x->parent->color = clib_red;
-                __right_rotate (pTree, x->parent);
+                _right_rotate (pTree, x->parent);
                 w = x->parent->left;
             }
             if (w->right->color == clib_black && w->left->color == clib_black) {
@@ -273,13 +273,13 @@ __rb_remove_fixup( struct clib_rb* pTree, struct clib_rb_node* x ) {
                 if (w->left->color == clib_black) {
                     w->right->color = clib_black;
                     w->color = clib_red;
-                    __left_rotate (pTree, w);
+                    _left_rotate (pTree, w);
                     w = x->parent->left;
                 }
                 w->color = x->parent->color;
                 x->parent->color = clib_black;
                 w->left->color = clib_black;
-                __right_rotate (pTree, x->parent);
+                _right_rotate (pTree, x->parent);
                 x = pTree->root;
             }
         }
@@ -288,7 +288,7 @@ __rb_remove_fixup( struct clib_rb* pTree, struct clib_rb_node* x ) {
 }
 
 static struct clib_rb_node*  
-__remove_c_rb(struct clib_rb* pTree, struct clib_rb_node* z ) {
+_remove_c_rb(struct clib_rb* pTree, struct clib_rb_node* z ) {
     struct clib_rb_node* x = (struct clib_rb_node*)0 ;
     struct clib_rb_node* y = (struct clib_rb_node*)0 ;
 
@@ -325,7 +325,7 @@ __remove_c_rb(struct clib_rb* pTree, struct clib_rb_node* z ) {
         y->value = tmp;
     }
     if (y->color == clib_black)
-        __rb_remove_fixup (pTree, x);
+        _rb_remove_fixup (pTree, x);
 
     debug_verify_properties ( pTree);
     return y;
@@ -351,10 +351,10 @@ remove_c_rb (struct clib_rb* pTree, void* key) {
     }
     if (z == rb_sentinel)
         return (struct clib_rb_node*)0 ;
-    return __remove_c_rb(pTree, z );
+    return _remove_c_rb(pTree, z );
 }
 static void
-__delete_c_rb_node (struct clib_rb* pTree, struct clib_rb_node* x ) {
+_delete_c_rb_node (struct clib_rb* pTree, struct clib_rb_node* x ) {
 
     void* key;
 	void* value;
@@ -386,7 +386,7 @@ delete_c_rb(struct clib_rb* pTree) {
         else if (z->right != rb_sentinel)
             z = z->right;
         else {
-            __delete_c_rb_node ( pTree, z );
+            _delete_c_rb_node ( pTree, z );
             if (z->parent) {
                 z = z->parent;
                 if (z->left != rb_sentinel){

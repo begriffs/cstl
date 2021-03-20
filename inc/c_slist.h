@@ -21,8 +21,8 @@
  *  THE SOFTWARE.
  ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
 
-#ifndef _C_SLIST_H_
-#define _C_SLIST_H_
+#ifndef C_SLIST_H
+#define C_SLIST_H
 
 struct clib_slist_node {
     struct clib_object* elem;
