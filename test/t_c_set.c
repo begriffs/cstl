@@ -30,7 +30,6 @@
 
 static void 
 delete_e ( void* ptr ) {
-    if ( ptr ) 
 	free ( ptr );
 }
 static int

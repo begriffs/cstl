@@ -76,9 +76,7 @@ compare_rb_e ( void*  l, void* r ) {
 
 void 
 free_rb_e ( void* p ) {
-    if ( p ) {
-        free ( p );
-    }
+    free ( p );
 }
 
 typedef struct test_data_tree {

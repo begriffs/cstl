@@ -30,8 +30,7 @@
 
 static void 
 free_element ( void* ptr ) {
-    if ( ptr )
-        free ( ptr);
+    free ( ptr);
 }
 
 void

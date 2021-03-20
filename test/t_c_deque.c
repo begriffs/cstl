@@ -36,8 +36,7 @@ compare_e ( void* left, void* right ) {
 }
 static void 
 free_e ( void* ptr ) {
-    if ( ptr )
-    free ( ptr);
+    free ( ptr );
 }
 
 static void 
