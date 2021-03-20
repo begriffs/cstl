@@ -76,7 +76,7 @@ struct clib_iterator {
 
 void  clib_copy ( void* destination, void* source, size_t size );
 void  clib_get  ( void* destination, void* source, size_t size);
-char* clib_strdup ( char *ptr );
+char* clib_strdup ( const char *s );
 
 struct clib_object* new_clib_object (void* inObject, size_t obj_size);
 clib_error get_raw_clib_object (struct clib_object *inObject, void**elem);

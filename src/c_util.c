@@ -22,6 +22,7 @@
  ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** ** **/
 
 #include "c_lib.h"
+#include <errno.h>
 #include <string.h>
 #include <stdlib.h>
 
@@ -75,10 +76,11 @@ delete_clib_object ( struct clib_object* inObject ) {
 }
 
 char*
-clib_strdup ( char *ptr ) {
-    #ifdef WIN32
-        return _strdup (ptr);
-    #else
-        return strdup (ptr);
-    #endif
+clib_strdup( const char *s ) {
+    char *ret = malloc(strlen(s) + 1);
+    if (ret)
+        strcpy(ret, s);
+    else
+        errno = ENOMEM;
+    return ret;
 }
