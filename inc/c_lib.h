@@ -75,13 +75,13 @@ struct clib_iterator {
 /*            H E L P E R       F U N C T I O N S                          */
 /* ------------------------------------------------------------------------*/
 
-extern void  clib_copy ( void* destination, void* source, size_t size );
-extern void  clib_get  ( void* destination, void* source, size_t size);
-extern char* clib_strdup ( char *ptr );
+void  clib_copy ( void* destination, void* source, size_t size );
+void  clib_get  ( void* destination, void* source, size_t size);
+char* clib_strdup ( char *ptr );
 
-extern struct clib_object* new_clib_object (void* inObject, size_t obj_size);
-extern clib_error get_raw_clib_object (struct clib_object *inObject, void**elem);
-extern void  delete_clib_object  (struct clib_object* inObject );
-extern void replace_raw_clib_object(struct clib_object* current_object,void* elem, size_t elem_size);
+struct clib_object* new_clib_object (void* inObject, size_t obj_size);
+clib_error get_raw_clib_object (struct clib_object *inObject, void**elem);
+void  delete_clib_object  (struct clib_object* inObject );
+void replace_raw_clib_object(struct clib_object* current_object,void* elem, size_t elem_size);
 
 #endif

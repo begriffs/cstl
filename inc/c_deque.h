@@ -34,20 +34,20 @@ struct clib_deque {
     clib_destroy destruct_fn;
 }c_deque;
 
-extern struct clib_deque* new_c_deque( int deq_size , clib_compare fn_c, clib_destroy fn_d);
-extern clib_error     push_back_c_deque (struct clib_deque* pDeq, void* elem, size_t elem_size);
-extern clib_error     push_front_c_deque(struct clib_deque* pDeq, void* elem,size_t elem_size);
+struct clib_deque* new_c_deque( int deq_size , clib_compare fn_c, clib_destroy fn_d);
+clib_error     push_back_c_deque (struct clib_deque* pDeq, void* elem, size_t elem_size);
+clib_error     push_front_c_deque(struct clib_deque* pDeq, void* elem,size_t elem_size);
 
-extern clib_error     front_c_deque     (struct clib_deque* pDeq,void*);
-extern clib_error     back_c_deque      (struct clib_deque* pDeq,void*);
-extern clib_error     pop_back_c_deque  (struct clib_deque* pDeq);
-extern clib_error     pop_front_c_deque (struct clib_deque* pDeq);
-extern clib_bool      empty_c_deque     (struct clib_deque* pDeq);
-extern int            size_c_deque ( struct clib_deque* pDeq);
-extern clib_error     delete_c_deque ( struct clib_deque* pDeq);
-extern clib_error     element_at_c_deque (struct clib_deque* pDeq, int index, void**elem);
+clib_error     front_c_deque     (struct clib_deque* pDeq,void*);
+clib_error     back_c_deque      (struct clib_deque* pDeq,void*);
+clib_error     pop_back_c_deque  (struct clib_deque* pDeq);
+clib_error     pop_front_c_deque (struct clib_deque* pDeq);
+clib_bool      empty_c_deque     (struct clib_deque* pDeq);
+int            size_c_deque ( struct clib_deque* pDeq);
+clib_error     delete_c_deque ( struct clib_deque* pDeq);
+clib_error     element_at_c_deque (struct clib_deque* pDeq, int index, void**elem);
 
-extern struct clib_iterator* new_iterator_c_deque(struct clib_deque* pDeq);
-extern void delete_iterator_c_deque ( struct clib_iterator* pItr);
+struct clib_iterator* new_iterator_c_deque(struct clib_deque* pDeq);
+void delete_iterator_c_deque ( struct clib_iterator* pItr);
 
 #endif

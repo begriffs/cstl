@@ -28,14 +28,14 @@ struct clib_set {
     struct clib_rb* root;
 };
 
-extern struct clib_set* new_c_set( clib_compare fn_c, clib_destroy fn_d);
-extern clib_error   insert_c_set ( struct clib_set* pSet, void* key, size_t key_size);
-extern clib_bool    exists_c_set ( struct clib_set* pSet, void* key);
-extern clib_error   remove_c_set ( struct clib_set* pSet, void* key);
-extern clib_bool    find_c_set   ( struct clib_set* pSet, void* key, void* outKey);
-extern clib_error   delete_c_set ( struct clib_set* pSet);
+struct clib_set* new_c_set( clib_compare fn_c, clib_destroy fn_d);
+clib_error   insert_c_set ( struct clib_set* pSet, void* key, size_t key_size);
+clib_bool    exists_c_set ( struct clib_set* pSet, void* key);
+clib_error   remove_c_set ( struct clib_set* pSet, void* key);
+clib_bool    find_c_set   ( struct clib_set* pSet, void* key, void* outKey);
+clib_error   delete_c_set ( struct clib_set* pSet);
 
-extern struct clib_iterator* new_iterator_c_set(struct clib_set* pSet);
-extern void delete_iterator_c_set ( struct clib_iterator* pItr);
+struct clib_iterator* new_iterator_c_set(struct clib_set* pSet);
+void delete_iterator_c_set ( struct clib_iterator* pItr);
 
 #endif

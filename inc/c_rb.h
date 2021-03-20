@@ -41,14 +41,14 @@ struct clib_rb {
     clib_compare compare_fn;
 };
 
-extern struct clib_rb* new_c_rb(clib_compare fn_c,clib_destroy fn_ed, clib_destroy fn_vd );
-extern clib_error  insert_c_rb(struct clib_rb* pTree, void* key, size_t key_size, void* value, size_t value_size);
-extern struct clib_rb_node*   find_c_rb (struct clib_rb* pTree, void* key);
-extern struct clib_rb_node* remove_c_rb (struct clib_rb* pTree, void* key);
-extern clib_error  delete_c_rb (struct clib_rb* pTree);
-extern clib_bool   empty_c_rb  (struct clib_rb* pTree);
+struct clib_rb* new_c_rb(clib_compare fn_c,clib_destroy fn_ed, clib_destroy fn_vd );
+clib_error  insert_c_rb(struct clib_rb* pTree, void* key, size_t key_size, void* value, size_t value_size);
+struct clib_rb_node*   find_c_rb (struct clib_rb* pTree, void* key);
+struct clib_rb_node* remove_c_rb (struct clib_rb* pTree, void* key);
+clib_error  delete_c_rb (struct clib_rb* pTree);
+clib_bool   empty_c_rb  (struct clib_rb* pTree);
 
-extern struct clib_rb_node *minimum_c_rb( struct clib_rb* pTree, struct clib_rb_node* x );
-extern struct clib_rb_node* tree_successor(struct clib_rb* pTree, struct clib_rb_node* x);
+struct clib_rb_node *minimum_c_rb( struct clib_rb* pTree, struct clib_rb_node* x );
+struct clib_rb_node* tree_successor(struct clib_rb* pTree, struct clib_rb_node* x);
 
 #endif

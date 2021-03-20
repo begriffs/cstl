@@ -38,17 +38,17 @@ struct clib_slist {
 };
 
 
-extern struct clib_slist* new_c_slist(clib_destroy fn_d, clib_compare fn_c);
-extern void           delete_c_slist   (struct clib_slist* pSlist);
-extern clib_error     insert_c_slist   (struct clib_slist* pSlist, int pos, void* elem, size_t elem_size);
-extern clib_error     push_back_c_slist(struct clib_slist* pSlist, void* elem, size_t elem_size);
-extern void           remove_c_slist   (struct clib_slist* pSlist, int pos);
-extern void           for_each_c_slist (struct clib_slist* pSlist, void (*fn)(void* ));
-extern clib_bool      find_c_slist     (struct clib_slist* pSlist, void* find_value, void**out_value);
+struct clib_slist* new_c_slist(clib_destroy fn_d, clib_compare fn_c);
+void           delete_c_slist   (struct clib_slist* pSlist);
+clib_error     insert_c_slist   (struct clib_slist* pSlist, int pos, void* elem, size_t elem_size);
+clib_error     push_back_c_slist(struct clib_slist* pSlist, void* elem, size_t elem_size);
+void           remove_c_slist   (struct clib_slist* pSlist, int pos);
+void           for_each_c_slist (struct clib_slist* pSlist, void (*fn)(void* ));
+clib_bool      find_c_slist     (struct clib_slist* pSlist, void* find_value, void**out_value);
 
 
-extern struct clib_iterator* new_iterator_c_slist(struct clib_slist* pSlit);
-extern void delete_iterator_c_slist ( struct clib_iterator* pItr);
+struct clib_iterator* new_iterator_c_slist(struct clib_slist* pSlit);
+void delete_iterator_c_slist ( struct clib_iterator* pItr);
 
 
 #endif

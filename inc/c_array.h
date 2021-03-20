@@ -32,20 +32,20 @@ struct clib_array {
     clib_destroy destruct_fn; /* Destructor function pointer*/
 };
 
-extern struct clib_array* new_c_array ( int init_size, clib_compare fn_c, clib_destroy fn_d);
-extern clib_error push_back_c_array ( struct clib_array* pArray, void* elem, size_t elem_size);
-extern clib_error element_at_c_array( struct clib_array* pArray, int pos, void**e);
-extern clib_error insert_at_c_array ( struct clib_array* pArray, int index, void* elem, size_t elem_size);
-extern int size_c_array( struct clib_array* pArray);
-extern int capacity_c_array( struct clib_array* pArray );
-extern clib_bool  empty_c_array( struct clib_array* pArray);
-extern clib_error reserve_c_array( struct clib_array* pArray, int pos);
-extern clib_error front_c_array( struct clib_array* pArray,void* elem);
-extern clib_error back_c_array( struct clib_array* pArray,void* elem);
-extern clib_error remove_from_c_array ( struct clib_array*, int pos);
-extern clib_error delete_c_array( struct clib_array* pArray);
+struct clib_array* new_c_array ( int init_size, clib_compare fn_c, clib_destroy fn_d);
+clib_error push_back_c_array ( struct clib_array* pArray, void* elem, size_t elem_size);
+clib_error element_at_c_array( struct clib_array* pArray, int pos, void**e);
+clib_error insert_at_c_array ( struct clib_array* pArray, int index, void* elem, size_t elem_size);
+int size_c_array( struct clib_array* pArray);
+int capacity_c_array( struct clib_array* pArray );
+clib_bool  empty_c_array( struct clib_array* pArray);
+clib_error reserve_c_array( struct clib_array* pArray, int pos);
+clib_error front_c_array( struct clib_array* pArray,void* elem);
+clib_error back_c_array( struct clib_array* pArray,void* elem);
+clib_error remove_from_c_array ( struct clib_array*, int pos);
+clib_error delete_c_array( struct clib_array* pArray);
 
-extern struct clib_iterator* new_iterator_c_array(struct clib_array* pArray);
-extern void delete_iterator_c_array ( struct clib_iterator* pItr);
+struct clib_iterator* new_iterator_c_array(struct clib_array* pArray);
+void delete_iterator_c_array ( struct clib_iterator* pItr);
 
 #endif
