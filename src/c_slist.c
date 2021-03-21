@@ -28,7 +28,7 @@ new_c_slist(clib_destroy fn_d, clib_compare fn_c){
     struct clib_slist* pSlist = malloc(sizeof *pSlist);
     if (!pSlist)
         return NULL;
-    pSlist->head           = (struct clib_slist_node*)0;
+    pSlist->head           = NULL;
     pSlist->destruct_fn    = fn_d;
     pSlist->compare_key_fn = fn_c;
     pSlist->size           = 0;
@@ -45,8 +45,8 @@ delete_c_slist( struct clib_slist* pSlist){
 clib_error           
 push_back_c_slist( struct clib_slist* pSlist, void* elem, size_t elem_size){
 
-    struct clib_slist_node* current  = (struct clib_slist_node*)0;
-    struct clib_slist_node* new_node = (struct clib_slist_node*)0;
+    struct clib_slist_node* current  = NULL;
+    struct clib_slist_node* new_node = NULL;
 
     new_node = malloc(sizeof *new_node);
     if (!new_node)
@@ -55,15 +55,15 @@ push_back_c_slist( struct clib_slist* pSlist, void* elem, size_t elem_size){
     new_node->elem = new_clib_object ( elem, elem_size );
     if ( ! new_node->elem )
         return CLIB_SLIST_INSERT_FAILED;
-    new_node->next = (struct clib_slist_node*)0;
+    new_node->next = NULL;
 
-    if ( pSlist->head == (struct clib_slist_node*)0 ) {
+    if ( !pSlist->head ) {
         pSlist->head = new_node;
         pSlist->size++;
         return CLIB_ERROR_SUCCESS;
     }
     current = pSlist->head;
-    while ( current->next != (struct clib_slist_node*)0 )
+    while ( current->next )
         current  = current->next;    
     current->next = new_node;
     pSlist->size++;
@@ -88,7 +88,7 @@ remove_c_slist( struct clib_slist* pSlist, int pos ) {
     int i = 0;
 
     struct clib_slist_node* current = pSlist->head;
-    struct clib_slist_node* temp    = (struct clib_slist_node*)0;
+    struct clib_slist_node* temp    = NULL;
 
     if ( pos > pSlist->size ) return;
 
@@ -111,7 +111,7 @@ clib_error
 insert_c_slist(struct clib_slist* pSlist, int pos, void* elem, size_t elem_size) {
     int i = 0;
     struct clib_slist_node* current  = pSlist->head;
-    struct clib_slist_node* new_node = (struct clib_slist_node*)0;
+    struct clib_slist_node* new_node = NULL;
    
     if ( pos == 1 ) {
         new_node       = malloc(sizeof *new_node);
@@ -154,7 +154,7 @@ void
 for_each_c_slist (struct clib_slist* pSlist, void (*fn)(void* )) {
     void* elem;
     struct clib_slist_node* current  = pSlist->head;
-    while ( current != (struct clib_slist_node*)0 ) {
+    while ( current ) {
         get_raw_clib_object(current->elem, &elem);
         (fn)(elem);
         free ( elem );
@@ -164,7 +164,7 @@ for_each_c_slist (struct clib_slist* pSlist, void (*fn)(void* )) {
 clib_bool
 find_c_slist (struct clib_slist* pSlist, void* find_value, void**out_value) {
     struct clib_slist_node* current  = pSlist->head;  
-    while ( current != (struct clib_slist_node*)0 ) {        
+    while ( current ) {
         get_raw_clib_object(current->elem, out_value);
         if ((pSlist->compare_key_fn)(find_value,*out_value) != 0){
             break;
@@ -189,7 +189,7 @@ get_next_c_slist( struct clib_iterator* pIterator ) {
 		pIterator->pCurrentElement = ((struct clib_slist_node*)pIterator->pCurrentElement)->next;
 	}
 	if ( ! pIterator->pCurrentElement)
-		return (struct clib_object*)0;
+		return NULL;
 
 	return ((struct clib_slist_node*)pIterator->pCurrentElement)->elem;
 }
@@ -224,7 +224,7 @@ new_iterator_c_slist(struct clib_slist* pSlist) {
 	itr->get_value     = get_value_c_slist;
 	itr->replace_value = replace_value_c_slist;
 	itr->pContainer     = pSlist;
-	itr->pCurrentElement = (void*)0;
+	itr->pCurrentElement = NULL;
 	itr->pCurrent      = 0;
 	return itr;
 }

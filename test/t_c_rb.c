@@ -37,26 +37,26 @@ static void*
     get_key ( struct clib_rb* tree, struct clib_rb_node* node) {
         if ( node ) 
             return node->raw_data.key;
-        return (void*)0;
+        return NULL;
     }
 
 static struct clib_rb_node*
     get_left (struct clib_rb* tree, struct clib_rb_node* node ) {
-        if ( node->left != rb_sentinel && node->left != (struct clib_rb_node*)0 )
+        if ( node->left != rb_sentinel && node->left )
             return node->left;
-        return (struct clib_rb_node*)0 ;
+        return NULL;
     }
 static struct clib_rb_node*
     get_right (struct clib_rb* tree, struct clib_rb_node* node ){
-        if ( node->right != rb_sentinel && node->right != (struct clib_rb_node*)0 )
+        if ( node->right != rb_sentinel && node->right )
             return node->right;
-        return (struct clib_rb_node*)0 ;
+        return NULL;
     }
 static struct clib_rb_node*
     get_parent ( struct clib_rb* tree,struct clib_rb_node* node ) {
-        if ( node->parent != rb_sentinel && node->parent != (struct clib_rb_node*)0 )
+        if ( node->parent != rb_sentinel && node->parent )
             return node->parent;
-        return (struct clib_rb_node*)0 ;
+        return NULL;
     }
 
 int 
@@ -91,7 +91,7 @@ typedef struct test_data_tree {
 static struct clib_rb_node*
 _find_c_rb ( struct clib_rb* tree, clib_compare fn_c, void* key ) {
     struct clib_rb_node* node = tree->root;
-    void* current_key = (void*)0;
+    void* current_key = NULL;
     int compare_result = 0;
 
     current_key = (void*)malloc ( tree->size_of_key);
@@ -135,22 +135,22 @@ test_each_elements(int l,int r, int p, int e,void* v, TS ts[], int i,
     if (ts[i].left != 0 ) 
         assert ( ts[i].left == l);
     else
-        assert ((void* )0 == (void* )get_key(tree,get_left(tree,v)));
+        assert (!get_key(tree,get_left(tree,v)));
     if ( ts[i].right != 0 ) 
         assert (ts[i].right == r);
     else
-        assert ((void* )0 == (void* )get_key(tree,get_right(tree,v)));
+        assert (!get_key(tree,get_right(tree,v)));
     if (ts[i].parent != 0 ) 
         assert (ts[i].parent == p);
     else
-        assert ((void* )0 == (void* )get_key(tree,get_parent(tree,v)));
+        assert (!get_key(tree,get_parent(tree,v)));
 }
 
 static void
 test_all_elements(struct clib_rb* tree, TS ts[], int size) {
     int i = 0;
     for ( i = 0; i < size; i++) {
-        void* v = (void*)0;
+        void* v = NULL;
         int l,r,p,e;
         v = find ( tree, &ts[i].element);
         update_values( v, &l,&r,&p,&e, tree);
@@ -161,9 +161,9 @@ test_all_elements(struct clib_rb* tree, TS ts[], int size) {
 static struct clib_rb* 
 create_tree(TS ts[], int size) {
     int i = 0;
-    struct clib_rb* tree = new_c_rb( compare_rb_e,free_rb_e, (void*)0, sizeof(int),0);
+    struct clib_rb* tree = new_c_rb( compare_rb_e,free_rb_e, NULL, sizeof(int),0);
     for ( i = 0; i < size; i++) {
-        insert_c_rb( tree, &(ts[i].element) ,(void*)0);
+        insert_c_rb( tree, &(ts[i].element) ,NULL);
     }
     return tree;
 }
@@ -215,7 +215,7 @@ test_c_rb() {
         size = (sizeof(ts)/sizeof(TS));
         size_after_delete = (sizeof(ts_delete_leaf_13)/sizeof(TS));
         node = remove_c_rb( tree, &i);
-        if ( node != (struct clib_rb_node*)0  ) {
+        if ( node ) {
             free ( node->raw_data.key);
             free ( node);
         }
@@ -225,7 +225,7 @@ test_c_rb() {
         i = 9;	
         size_after_delete = (sizeof(ts_delete_9)/sizeof(TS));
         node = remove_c_rb( tree, &i);
-        if ( node != (struct clib_rb_node*)0  ) {
+        if ( node ) {
             free ( node->raw_data.key);
             free ( node);
         }
@@ -235,7 +235,7 @@ test_c_rb() {
         i = 15;	
         size_after_delete = (sizeof(ts_delete_15)/sizeof(TS));
         node = remove_c_rb( tree, &i);
-        if ( node != (struct clib_rb_node*)0  ) {
+        if ( node ) {
             free ( node->raw_data.key);
             free ( node);
         }
@@ -243,7 +243,7 @@ test_c_rb() {
     }
     {
         int i = 1;
-        insert_c_rb( tree, &i, (void*)0);
+        insert_c_rb( tree, &i, NULL);
         size_after_delete = (sizeof(ts_insert_1)/sizeof(TS));
         test_all_elements(tree, ts_insert_1, size_after_delete);
     }

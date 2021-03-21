@@ -52,14 +52,14 @@ struct clib_deque*
 new_c_deque( int deq_size , clib_compare fn_c, clib_destroy fn_d) {
 
     struct clib_deque* pDeq = malloc(sizeof *pDeq);
-	if ( pDeq == (struct clib_deque*)0 )
-		return (struct clib_deque*)0;
+	if ( !pDeq )
+		return NULL;
 
     pDeq->no_max_elements  = deq_size < 8 ? 8 : deq_size;
     pDeq->pElements = malloc(pDeq->no_max_elements * sizeof(struct clib_object*));
 
-	if ( pDeq == (struct clib_deque*)0 )
-		return (struct clib_deque*)0;
+	if ( !pDeq )
+		return NULL;
 
     pDeq->compare_fn      = fn_c;
     pDeq->destruct_fn     = fn_d;
@@ -71,7 +71,7 @@ new_c_deque( int deq_size , clib_compare fn_c, clib_destroy fn_d) {
 }
 clib_error 
 push_back_c_deque(struct clib_deque* pDeq, void* elem, size_t elem_size) {
-	if ( pDeq == (struct clib_deque*)0 )
+	if ( !pDeq )
 		return CLIB_DEQUE_NOT_INITIALIZED;
 
     if ( pDeq->tail == pDeq->no_max_elements )
@@ -105,7 +105,7 @@ push_front_c_deque(struct clib_deque* pDeq, void* elem,size_t elem_size) {
 
 clib_error     
 front_c_deque (struct clib_deque* pDeq, void* elem) {
-	if ( pDeq == (struct clib_deque*)0 )
+	if ( !pDeq )
 		return CLIB_DEQUE_NOT_INITIALIZED;
     element_at_c_deque ( pDeq, pDeq->head + 1, elem );
     return CLIB_ERROR_SUCCESS;
@@ -113,7 +113,7 @@ front_c_deque (struct clib_deque* pDeq, void* elem) {
 
 clib_error 
 back_c_deque (struct clib_deque* pDeq, void* elem) {
-	if ( pDeq == (struct clib_deque*)0 )
+	if ( !pDeq )
 		return CLIB_DEQUE_NOT_INITIALIZED;
     element_at_c_deque ( pDeq, pDeq->tail - 1, elem );
     return CLIB_ERROR_SUCCESS;
@@ -121,7 +121,7 @@ back_c_deque (struct clib_deque* pDeq, void* elem) {
 
 clib_error     
 pop_back_c_deque (struct clib_deque* pDeq) {
-	if ( pDeq == (struct clib_deque*)0 )
+	if ( !pDeq )
 		return CLIB_DEQUE_NOT_INITIALIZED;
 
     if ( pDeq->destruct_fn ) {
@@ -140,7 +140,7 @@ pop_back_c_deque (struct clib_deque* pDeq) {
 clib_error     
 pop_front_c_deque(struct clib_deque* pDeq) {
     
-	if ( pDeq == (struct clib_deque*)0 )
+	if ( !pDeq )
 		return CLIB_DEQUE_NOT_INITIALIZED;
 
     if ( pDeq->destruct_fn ) {
@@ -157,14 +157,14 @@ pop_front_c_deque(struct clib_deque* pDeq) {
 }
 clib_bool      
 empty_c_deque (struct clib_deque* pDeq) {
-	if ( pDeq == (struct clib_deque*)0 )
+	if ( !pDeq )
 		return clib_true;
 
     return pDeq->no_of_elements == 0 ? clib_true : clib_false;
 }
 int 
 size_c_deque( struct clib_deque* pDeq ) {
-	if ( pDeq == (struct clib_deque*)0 )
+	if ( !pDeq )
 		return clib_true;
 
     return pDeq->no_of_elements - 1;
@@ -185,7 +185,7 @@ clib_error
 delete_c_deque ( struct clib_deque* pDeq ) {
     int i = 0;
 
-	if ( pDeq == (struct clib_deque*)0 )
+	if ( !pDeq )
 		return CLIB_ERROR_SUCCESS;
 
     if ( pDeq->destruct_fn ) {
@@ -211,7 +211,7 @@ get_next_c_deque( struct clib_iterator* pIterator ) {
 	int index = ((struct clib_iterator*)pIterator)->pCurrent;
 
 	if ( index < 0 || index >= pDeq->tail ){
-		return (struct clib_object*)0;
+		return NULL;
 	}
 	pIterator->pCurrentElement = pDeq->pElements[pIterator->pCurrent++];
 	return pIterator->pCurrentElement ;

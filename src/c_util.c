@@ -39,12 +39,12 @@ struct clib_object*
 new_clib_object(void* inObject, size_t obj_size) {
     struct clib_object* tmp = malloc(sizeof *tmp);
     if ( ! tmp )
-        return (struct clib_object*)0;
+        return NULL;
     tmp->size        = obj_size;
     tmp->raw_data    = malloc(obj_size);
     if ( !tmp->raw_data ) {
         free ( tmp );
-        return (struct clib_object*)0;
+        return NULL;
     }
     memcpy ( tmp->raw_data, inObject, obj_size);
     return tmp;

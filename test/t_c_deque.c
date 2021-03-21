@@ -62,7 +62,7 @@ create_deque() {
     int i = 0;
     int limit = 20;
     struct clib_deque* myDeq = new_c_deque ( 10, compare_e, NULL);
-    assert ( (struct clib_deque*)0 != myDeq );
+    assert ( myDeq );
 
     for ( i = 0; i <= limit; i++ ) { 
         if ( flip ) {
@@ -110,7 +110,7 @@ test_c_deque() {
     int j = 0;
 
     struct clib_deque* myDeq = new_c_deque ( 10, compare_e, NULL);
-    assert ( (struct clib_deque*)0 != myDeq );
+    assert ( myDeq );
 
     for ( i = 0; i <= limit; i++ ) { 
         if ( flip ) {

@@ -41,13 +41,13 @@ new_c_array(int array_size, clib_compare fn_c, clib_destroy fn_d) {
 
     struct clib_array* pArray = malloc(sizeof *pArray);
     if ( ! pArray )
-        return (struct clib_array*)0;
+        return NULL;
 
     pArray->no_max_elements = array_size < 8 ? 8 : array_size;
     pArray->pElements = malloc(pArray->no_max_elements * sizeof(struct clib_object*));
     if ( ! pArray->pElements ){
         free ( pArray );
-        return (struct clib_array*)0;
+        return NULL;
     }
     pArray->compare_fn      = fn_c;
     pArray->destruct_fn     = fn_d;
@@ -99,28 +99,28 @@ element_at_c_array (struct clib_array* pArray, int index, void** elem) {
 
 int
 size_c_array ( struct clib_array* pArray ) {
-	if ( pArray == (struct clib_array*)0 )
+	if ( !pArray )
 		return 0;
 	return pArray->no_of_elements - 1 ;
 }
 
 int
 capacity_c_array ( struct clib_array* pArray ) {
-	if ( pArray == (struct clib_array*)0 )
+	if ( !pArray )
 		return 0;
 	return pArray->no_max_elements;
 }
 
 clib_bool  
 empty_c_array ( struct clib_array* pArray) {
-	if ( pArray == (struct clib_array*)0 )
+	if ( !pArray )
 		return 0;
 	return pArray->no_of_elements == 0 ? clib_true : clib_false;
 }
 
 clib_error 
 reserve_c_array ( struct clib_array* pArray, int new_size) {
-	if ( pArray == (struct clib_array*)0 )
+	if ( !pArray )
 		return CLIB_ARRAY_NOT_INITIALIZED;
 
 	if ( new_size <= pArray->no_max_elements )
@@ -191,7 +191,7 @@ delete_c_array( struct clib_array* pArray) {
     clib_error rc = CLIB_ERROR_SUCCESS;
     int i = 0;
 
-    if ( pArray == (struct clib_array*)0 )
+    if ( !pArray )
         return rc;
 
     if ( pArray->destruct_fn ) {
@@ -216,7 +216,7 @@ get_next_c_array( struct clib_iterator* pIterator ) {
 	struct clib_array *pArray = (struct clib_array*)pIterator->pContainer;
 
 	if (pIterator->pCurrent > size_c_array (pArray))
-		return (struct clib_object*)0;
+		return NULL;
 
 	pIterator->pCurrentElement = pArray->pElements[pIterator->pCurrent++];
 	return pIterator->pCurrentElement;

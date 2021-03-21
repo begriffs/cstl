@@ -48,7 +48,7 @@ test_with_int() {
     int size = 10;
     int i = 0;
     int rc ;
-    void* p_rv = (void* )0;
+    void* p_rv = NULL;
     int rv = 0;
     struct clib_array* myArray  = new_c_array (8,compare_e,NULL);
     assert ( clib_true == empty_c_array( myArray ));
@@ -125,7 +125,7 @@ test_with_pointers() {
     int size = 10;
     int i = 0;
     int *rv, rc ;
-    void* p_rv = (void* )0;
+    void* p_rv = NULL;
     struct clib_array* myArray  = new_c_array (8,compare_e,free_e);
     assert ( clib_true == empty_c_array( myArray ));
 
@@ -189,7 +189,7 @@ test_with_strings() {
     char *input_array[11];
     int i = 0;
     char *rv, rc ;
-    void* p_rv = (void* )0;
+    void* p_rv = NULL;
     struct clib_array* myArray  = new_c_array (8,compare_e,free_e);
     assert ( clib_true == empty_c_array( myArray ));
 
@@ -297,7 +297,7 @@ create_array() {
     int size = 10;
     int i = 0;
     int rc ;
-    void* p_rv = (void* )0;
+    void* p_rv = NULL;
     int rv = 0;
 
     struct clib_array* myArray  = new_c_array (8,compare_e,NULL);

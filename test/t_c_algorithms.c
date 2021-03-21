@@ -42,7 +42,7 @@ create_c_array() {
     int size = 10;
     int i = 0;
     int rc ;
-    void* p_rv = (void* )0;
+    void* p_rv = NULL;
     int rv = 0;
 
     struct clib_array* myArray  = new_c_array (8,compare_integers,NULL);
@@ -68,7 +68,7 @@ create_deque() {
     int i = 0;
     int limit = 20;
     struct clib_deque* myDeq = new_c_deque ( 10, compare_integers, NULL);
-    assert ( (struct clib_deque*)0 != myDeq );
+    assert ( myDeq );
 
     for ( i = 0; i <= limit; i++ ) { 
         if ( flip ) {
