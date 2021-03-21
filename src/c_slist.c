@@ -84,8 +84,8 @@ _remove_c_list ( struct clib_slist* pSlist, struct clib_slist_node* pSlistNode )
     free ( pSlistNode);
 }
 void           
-remove_c_slist( struct clib_slist* pSlist, int pos ) {
-    int i = 0;
+remove_c_slist( struct clib_slist* pSlist, size_t pos ) {
+    size_t i = 0;
 
     struct clib_slist_node* current = pSlist->head;
     struct clib_slist_node* temp    = NULL;
@@ -108,8 +108,8 @@ remove_c_slist( struct clib_slist* pSlist, int pos ) {
     pSlist->size--;
 }
 clib_error           
-insert_c_slist(struct clib_slist* pSlist, int pos, void* elem, size_t elem_size) {
-    int i = 0;
+insert_c_slist(struct clib_slist* pSlist, size_t pos, void* elem, size_t elem_size) {
+    size_t i = 0;
     struct clib_slist_node* current  = pSlist->head;
     struct clib_slist_node* new_node = NULL;
    

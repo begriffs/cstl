@@ -30,14 +30,14 @@ static struct clib_array*
 array_check_and_grow ( struct clib_array* pArray) {
     if ( pArray->no_of_elements >= pArray->no_max_elements ) {
         pArray->no_max_elements  = 2 * pArray->no_max_elements;
-        pArray->pElements        = (struct clib_object**) realloc ( pArray->pElements, 
+        pArray->pElements        = realloc ( pArray->pElements, 
                                       pArray->no_max_elements * sizeof ( struct clib_object*));
     }
     return pArray;
 }
 
 struct clib_array* 
-new_c_array(int array_size, clib_compare fn_c, clib_destroy fn_d) {
+new_c_array(size_t array_size, clib_compare fn_c, clib_destroy fn_d) {
 
     struct clib_array* pArray = malloc(sizeof *pArray);
     if ( ! pArray )
@@ -57,7 +57,7 @@ new_c_array(int array_size, clib_compare fn_c, clib_destroy fn_d) {
 }
 
 static clib_error 
-insert_c_array ( struct clib_array* pArray, int index, void* elem, size_t elem_size) {
+insert_c_array ( struct clib_array* pArray, size_t index, void* elem, size_t elem_size) {
 
     clib_error rc           = CLIB_ERROR_SUCCESS;
     struct clib_object* pObject = new_clib_object ( elem, elem_size );
@@ -84,7 +84,7 @@ push_back_c_array (struct clib_array* pArray, void* elem, size_t elem_size) {
 }
 
 clib_error 
-element_at_c_array (struct clib_array* pArray, int index, void** elem) {
+element_at_c_array (struct clib_array* pArray, size_t index, void** elem) {
     clib_error rc = CLIB_ERROR_SUCCESS;
 
     if ( ! pArray )
@@ -97,14 +97,14 @@ element_at_c_array (struct clib_array* pArray, int index, void** elem) {
     return rc;
 }
 
-int
+size_t
 size_c_array ( struct clib_array* pArray ) {
 	if ( !pArray )
 		return 0;
 	return pArray->no_of_elements - 1 ;
 }
 
-int
+size_t
 capacity_c_array ( struct clib_array* pArray ) {
 	if ( !pArray )
 		return 0;
@@ -119,7 +119,7 @@ empty_c_array ( struct clib_array* pArray) {
 }
 
 clib_error 
-reserve_c_array ( struct clib_array* pArray, int new_size) {
+reserve_c_array ( struct clib_array* pArray, size_t new_size) {
 	if ( !pArray )
 		return CLIB_ARRAY_NOT_INITIALIZED;
 
@@ -142,7 +142,7 @@ back_c_array ( struct clib_array* pArray,void* elem) {
 }
 
 clib_error 
-insert_at_c_array ( struct clib_array* pArray, int index, void* elem, size_t elem_size) {
+insert_at_c_array ( struct clib_array* pArray, size_t index, void* elem, size_t elem_size) {
     clib_error rc = CLIB_ERROR_SUCCESS;
     if ( ! pArray )
         return CLIB_ARRAY_NOT_INITIALIZED;
@@ -162,7 +162,7 @@ insert_at_c_array ( struct clib_array* pArray, int index, void* elem, size_t ele
 }
 
 clib_error     
-remove_from_c_array ( struct clib_array* pArray, int index) {
+remove_from_c_array ( struct clib_array* pArray, size_t index) {
     clib_error   rc = CLIB_ERROR_SUCCESS;
 
     if ( ! pArray )
@@ -189,7 +189,7 @@ remove_from_c_array ( struct clib_array* pArray, int index) {
 clib_error 
 delete_c_array( struct clib_array* pArray) {
     clib_error rc = CLIB_ERROR_SUCCESS;
-    int i = 0;
+    size_t i = 0;
 
     if ( !pArray )
         return rc;

@@ -57,7 +57,7 @@ struct clib_iterator {
 	void (*replace_value)(struct clib_iterator*,void*,size_t);
 	void* (*get_value)(void*);
 	void* pContainer;
-	int   pCurrent;
+	size_t pCurrent;
 	void* pCurrentElement;
 };
 

@@ -28,7 +28,7 @@
 #define CLIB_DEQUE_INDEX(x)  ((char *)(pDeq)->pElements + (sizeof(struct clib_object) * (x)))
 
 static clib_error 
-insert_c_deque ( struct clib_deque* pDeq, int index, void* elem,size_t elem_size) {
+insert_c_deque ( struct clib_deque* pDeq, size_t index, void* elem,size_t elem_size) {
     clib_error rc           = CLIB_ERROR_SUCCESS;
     struct clib_object* pObject = new_clib_object ( elem, elem_size );
     if ( ! pObject )
@@ -43,13 +43,13 @@ static struct clib_deque*
 grow_deque ( struct clib_deque* pDeq ) {
 
    	pDeq->no_max_elements = pDeq->no_max_elements * 2;
-    pDeq->pElements        = (struct clib_object**) realloc ( pDeq->pElements, 
+    pDeq->pElements       = realloc ( pDeq->pElements, 
                                  pDeq->no_max_elements * sizeof ( struct clib_object*));
     return pDeq;
 
 }
 struct clib_deque*  
-new_c_deque( int deq_size , clib_compare fn_c, clib_destroy fn_d) {
+new_c_deque( size_t deq_size , clib_compare fn_c, clib_destroy fn_d) {
 
     struct clib_deque* pDeq = malloc(sizeof *pDeq);
 	if ( !pDeq )
@@ -85,9 +85,9 @@ push_back_c_deque(struct clib_deque* pDeq, void* elem, size_t elem_size) {
 clib_error 
 push_front_c_deque(struct clib_deque* pDeq, void* elem,size_t elem_size) {
     clib_error rc = CLIB_ERROR_SUCCESS;	
-    int to        = 0;
-    int from      = 0;
-    int count     = 0;
+    size_t to        = 0;
+    size_t from      = 0;
+    size_t count     = 0;
 
     if ( pDeq->head == 0 ) {
         pDeq = grow_deque(pDeq);
@@ -162,7 +162,7 @@ empty_c_deque (struct clib_deque* pDeq) {
 
     return pDeq->no_of_elements == 0 ? clib_true : clib_false;
 }
-int 
+size_t
 size_c_deque( struct clib_deque* pDeq ) {
 	if ( !pDeq )
 		return clib_true;
@@ -170,7 +170,7 @@ size_c_deque( struct clib_deque* pDeq ) {
     return pDeq->no_of_elements - 1;
 }
 clib_error 
-element_at_c_deque (struct clib_deque* pDeq, int index, void**elem) {
+element_at_c_deque (struct clib_deque* pDeq, size_t index, void**elem) {
 
     clib_error rc = CLIB_ERROR_SUCCESS;
 
@@ -183,7 +183,7 @@ element_at_c_deque (struct clib_deque* pDeq, int index, void**elem) {
 
 clib_error
 delete_c_deque ( struct clib_deque* pDeq ) {
-    int i = 0;
+    size_t i = 0;
 
 	if ( !pDeq )
 		return CLIB_ERROR_SUCCESS;
@@ -208,7 +208,7 @@ delete_c_deque ( struct clib_deque* pDeq ) {
 static struct clib_object* 
 get_next_c_deque( struct clib_iterator* pIterator ) {
 	struct clib_deque *pDeq = (struct clib_deque*)pIterator->pContainer;
-	int index = ((struct clib_iterator*)pIterator)->pCurrent;
+	size_t index = ((struct clib_iterator*)pIterator)->pCurrent;
 
 	if ( index < 0 || index >= pDeq->tail ){
 		return NULL;
