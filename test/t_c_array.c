@@ -130,7 +130,7 @@ test_with_pointers() {
     assert ( clib_true == empty_c_array( myArray ));
 
     for ( i = 0; i <= size; i++) {
-        int *v = ( int*) malloc ( sizeof(int));
+        int *v = malloc ( sizeof *v );
         memcpy ( v, &i, sizeof(int));
         push_back_c_array ( myArray, v ,sizeof(int*));
         free ( v );

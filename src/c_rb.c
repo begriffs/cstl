@@ -83,7 +83,7 @@ _right_rotate(struct clib_rb* pTree, struct clib_rb_node* x) {
 struct clib_rb*
 new_c_rb(clib_compare fn_c,clib_destroy fn_ed, clib_destroy fn_vd ){
 
-    struct clib_rb* pTree = (struct clib_rb*)malloc(sizeof(struct clib_rb));
+    struct clib_rb* pTree = malloc(sizeof *pTree);
     if ( pTree == (struct clib_rb*)0 )
         return (struct clib_rb*)0;
 
@@ -167,7 +167,7 @@ insert_c_rb(struct clib_rb* pTree, void* k, size_t key_size, void* v, size_t val
 	struct clib_rb_node* y;
 	struct clib_rb_node* z;
 
-    x = (struct clib_rb_node*)malloc (sizeof(struct clib_rb_node));
+    x = malloc (sizeof *x);
     if ( x == (struct clib_rb_node*)0  ) 
         return CLIB_ERROR_MEMORY;
 

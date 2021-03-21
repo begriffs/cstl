@@ -30,7 +30,7 @@ struct clib_map*
 new_c_map ( clib_compare fn_c_k, clib_destroy fn_k_d,  
             clib_destroy fn_v_d) {
 
-    struct clib_map* pMap  =  (struct clib_map*)malloc(sizeof(struct clib_map));
+    struct clib_map* pMap = malloc(sizeof *pMap);
     if (pMap == (struct clib_map*)0)
         return (struct clib_map*)0;
 
@@ -149,7 +149,9 @@ replace_value_c_map(struct clib_iterator *pIterator, void* elem, size_t elem_siz
 
 struct clib_iterator* 
 new_iterator_c_map(struct clib_map* pMap) {
-	struct clib_iterator *itr = ( struct clib_iterator*) malloc ( sizeof ( struct clib_iterator));
+	struct clib_iterator *itr = malloc ( sizeof *itr );
+	if (!itr)
+		return NULL;
 	itr->get_next     = get_next_c_map;
 	itr->get_value    = get_value_c_map;
 	itr->replace_value = replace_value_c_map;

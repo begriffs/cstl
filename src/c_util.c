@@ -37,11 +37,11 @@ clib_get ( void* destination, void* source, size_t size) {
 
 struct clib_object*
 new_clib_object(void* inObject, size_t obj_size) {
-    struct clib_object* tmp = (struct clib_object*)malloc(sizeof(struct clib_object));   
+    struct clib_object* tmp = malloc(sizeof *tmp);
     if ( ! tmp )
         return (struct clib_object*)0;
     tmp->size        = obj_size;
-    tmp->raw_data    = (void*)malloc(obj_size);
+    tmp->raw_data    = malloc(obj_size);
     if ( !tmp->raw_data ) {
         free ( tmp );
         return (struct clib_object*)0;
@@ -52,7 +52,7 @@ new_clib_object(void* inObject, size_t obj_size) {
 
 clib_error
 get_raw_clib_object ( struct clib_object *inObject, void**elem) {
-    *elem = (void*)malloc(inObject->size);
+    *elem = malloc(inObject->size);
     if ( ! *elem )
         return CLIB_ELEMENT_RETURN_ERROR;
     memcpy ( *elem, inObject->raw_data, inObject->size );
@@ -62,8 +62,9 @@ get_raw_clib_object ( struct clib_object *inObject, void**elem) {
 void 
 replace_raw_clib_object(struct clib_object* current_object,void* elem, size_t elem_size) {
 	free (current_object->raw_data);
-	current_object->raw_data = (void*)malloc(elem_size);
-	memcpy ( current_object->raw_data, elem, elem_size);
+	current_object->raw_data = malloc(elem_size);
+	if (current_object->raw_data)
+		memcpy ( current_object->raw_data, elem, elem_size);
 }
 
 

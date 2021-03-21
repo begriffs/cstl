@@ -39,12 +39,12 @@ array_check_and_grow ( struct clib_array* pArray) {
 struct clib_array* 
 new_c_array(int array_size, clib_compare fn_c, clib_destroy fn_d) {
 
-    struct clib_array* pArray = (struct clib_array*)malloc(sizeof(struct clib_array));
+    struct clib_array* pArray = malloc(sizeof *pArray);
     if ( ! pArray )
         return (struct clib_array*)0;
 
     pArray->no_max_elements = array_size < 8 ? 8 : array_size;
-    pArray->pElements = (struct clib_object**) malloc(pArray->no_max_elements * sizeof(struct clib_object*));
+    pArray->pElements = malloc(pArray->no_max_elements * sizeof(struct clib_object*));
     if ( ! pArray->pElements ){
         free ( pArray );
         return (struct clib_array*)0;
@@ -242,7 +242,9 @@ replace_value_c_array(struct clib_iterator *pIterator, void* elem, size_t elem_s
 
 struct clib_iterator* 
 new_iterator_c_array(struct clib_array* pArray) {
-	struct clib_iterator *itr = ( struct clib_iterator*) malloc ( sizeof ( struct clib_iterator));
+	struct clib_iterator *itr = malloc ( sizeof *itr );
+	if (!itr)
+		return NULL;
 	itr->get_next   = get_next_c_array;
 	itr->get_value  = get_value_c_array;
 	itr->replace_value = replace_value_c_array;

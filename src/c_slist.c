@@ -25,7 +25,9 @@
 
 struct clib_slist* 
 new_c_slist(clib_destroy fn_d, clib_compare fn_c){
-    struct clib_slist* pSlist  = (struct clib_slist*)malloc(sizeof(struct clib_slist));
+    struct clib_slist* pSlist = malloc(sizeof *pSlist);
+    if (!pSlist)
+        return NULL;
     pSlist->head           = (struct clib_slist_node*)0;
     pSlist->destruct_fn    = fn_d;
     pSlist->compare_key_fn = fn_c;
@@ -46,7 +48,9 @@ push_back_c_slist( struct clib_slist* pSlist, void* elem, size_t elem_size){
     struct clib_slist_node* current  = (struct clib_slist_node*)0;
     struct clib_slist_node* new_node = (struct clib_slist_node*)0;
 
-    new_node = (struct clib_slist_node*)malloc(sizeof(struct clib_slist_node));
+    new_node = malloc(sizeof *new_node);
+    if (!new_node)
+        return CLIB_SLIST_INSERT_FAILED;
 
     new_node->elem = new_clib_object ( elem, elem_size );
     if ( ! new_node->elem )
@@ -110,7 +114,9 @@ insert_c_slist(struct clib_slist* pSlist, int pos, void* elem, size_t elem_size)
     struct clib_slist_node* new_node = (struct clib_slist_node*)0;
    
     if ( pos == 1 ) {
-        new_node       = (struct clib_slist_node*)malloc(sizeof(struct clib_slist_node));
+        new_node       = malloc(sizeof *new_node);
+        if (!new_node)
+            return CLIB_SLIST_INSERT_FAILED;
         new_node->elem = new_clib_object ( elem, elem_size );
         if ( ! new_node->elem ) {
             free ( new_node );
@@ -129,7 +135,9 @@ insert_c_slist(struct clib_slist* pSlist, int pos, void* elem, size_t elem_size)
     for ( i = 1; i < pos - 1; i++) {
         current = current->next;
     }
-    new_node       = (struct clib_slist_node*)malloc(sizeof(struct clib_slist_node));
+    new_node       = malloc(sizeof *new_node);
+    if ( ! new_node )
+        return CLIB_SLIST_INSERT_FAILED;
     new_node->elem = new_clib_object ( elem, elem_size );
     if ( ! new_node->elem ) {
         free ( new_node );
@@ -209,7 +217,9 @@ replace_value_c_slist(struct clib_iterator *pIterator, void* elem, size_t elem_s
 
 struct clib_iterator* 
 new_iterator_c_slist(struct clib_slist* pSlist) {
-	struct clib_iterator *itr = ( struct clib_iterator*) malloc ( sizeof ( struct clib_iterator));
+	struct clib_iterator *itr = malloc ( sizeof *itr );
+	if (!itr)
+		return NULL;
 	itr->get_next      = get_next_c_slist;
 	itr->get_value     = get_value_c_slist;
 	itr->replace_value = replace_value_c_slist;

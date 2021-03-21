@@ -28,7 +28,7 @@
 struct clib_set* 
 new_c_set ( clib_compare fn_c, clib_destroy fn_d) {
 
-    struct clib_set* pSet  =  (struct clib_set*)malloc(sizeof(struct clib_set));
+    struct clib_set* pSet = malloc(sizeof *pSet);
     if (pSet == (struct clib_set*)0 )
         return (struct clib_set*)0 ;
 
@@ -126,7 +126,9 @@ get_value_c_set( void* pObject) {
 
 struct clib_iterator* 
 new_iterator_c_set(struct clib_set* pSet) {
-	struct clib_iterator *itr = ( struct clib_iterator*) malloc ( sizeof ( struct clib_iterator));
+	struct clib_iterator *itr = malloc ( sizeof *itr );
+	if (!itr)
+		return NULL;
 	itr->get_next     = get_next_c_set;
 	itr->get_value    = get_value_c_set;
 	itr->pContainer   = pSet;

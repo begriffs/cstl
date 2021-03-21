@@ -136,7 +136,7 @@ test_c_deque() {
 
     myDeq = new_c_deque ( 10, compare_e, free_e); 
     for ( i = 0; i <= limit; i ++ ) { 
-        int *v = (int*)malloc(sizeof(int ));
+        int *v = malloc(sizeof *v);
         memcpy ( v, &i, sizeof ( int ));
         push_back_c_deque ( myDeq, v , sizeof(int*));
         free ( v );

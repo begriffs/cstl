@@ -37,7 +37,7 @@ void
 add_elements_to_list( struct clib_slist* ll, int x, int y ) {
     int i = 0;
     for ( i = x; i <= y; i++ ) { 
-        int *v = ( int *) malloc ( sizeof ( int ));
+        int *v = malloc ( sizeof *v );
         memcpy ( v, &i, sizeof ( int ));
         push_back_c_slist ( ll, v , sizeof(v));
         free ( v );
@@ -111,7 +111,7 @@ test_c_slist() {
     for_each_c_slist(list, print_e);
 
     i = 55;
-    v = ( int *) malloc ( sizeof ( int ));
+    v = malloc ( sizeof *v );
     memcpy ( v, &i, sizeof ( int ));
     insert_c_slist(list,5, v,sizeof(v));
     free ( v );
@@ -127,21 +127,21 @@ test_c_slist() {
     for_each_c_slist(list, print_e);
 
     i = 1;
-    v = ( int *) malloc ( sizeof ( int ));
+    v = malloc ( sizeof *v );
     memcpy ( v, &i, sizeof ( int ));
     insert_c_slist(list,1,v,sizeof(v));
     free ( v );
     for_each_c_slist(list, print_e);
 
     i = 11;
-    v = ( int *) malloc ( sizeof ( int ));
+    v = malloc ( sizeof *v );
     memcpy ( v, &i, sizeof ( int ));
     insert_c_slist(list,11,v,sizeof(v));
     free ( v );
     for_each_c_slist(list, print_e);
 
     i = 12;
-    v = ( int *) malloc ( sizeof ( int ));
+    v = malloc ( sizeof *v );
     memcpy ( v, &i, sizeof ( int ));
     insert_c_slist(list,200,v,sizeof(v));
     free ( v );

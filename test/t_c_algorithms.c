@@ -119,7 +119,7 @@ create_slist() {
 	struct clib_slist* pList = new_c_slist(free_element,compare_integers_ptr);
     int i = 0;
     for ( i = 0; i <= 10; i++ ) { 
-        int *v = ( int *) malloc ( sizeof ( int ));
+        int *v = malloc ( sizeof *v );
         memcpy ( v, &i, sizeof ( int ));
         push_back_c_slist ( pList, v , sizeof(v));
         free ( v );
